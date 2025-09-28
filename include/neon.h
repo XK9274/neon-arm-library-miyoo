@@ -44,6 +44,9 @@ void scale4x3_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 void scale4x4_n16(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
 void scale4x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
 
+// NEON optimized memcpy
+void* neon_memcpy(void* dest, const void* src, size_t n);
+
 //	C scalers
 void scale1x1_c16(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
 void scale1x1_c32(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
