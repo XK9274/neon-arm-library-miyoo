@@ -397,7 +397,7 @@ void scale1x4_n16(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl128), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 
@@ -616,7 +616,7 @@ void scale1x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl128), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 
@@ -1092,7 +1092,7 @@ void scale2x4_n16(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl64), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q0","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q0","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 
@@ -1314,7 +1314,7 @@ void scale2x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl64), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 
@@ -1536,7 +1536,7 @@ void scale4x4_n16(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl32), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 
@@ -1726,7 +1726,7 @@ void scale4x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 	"	bne 1b			"
 	: "+r"(src), "+r"(dst)
 	: "r"(swl32), "r"(swl), "r"(sadd), "r"(dadd), "r"(finofs), "r"(dp)
-	: "r8","r9","r10","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
+	: "r8","r9","r10","r11","lr","q8","q9","q10","q11","q12","q13","q14","q15","memory","cc"
 	);
 }
 

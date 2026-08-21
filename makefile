@@ -26,7 +26,7 @@ $(LIB_DIR):
 	mkdir -p $(LIB_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -O3 -fPIC -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.S | $(OBJ_DIR)
 	$(AS) -I$(INC_DIR) -c $< -o $@
