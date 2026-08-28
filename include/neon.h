@@ -47,6 +47,20 @@ void scale4x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 // NEON optimized memcpy
 void* neon_memcpy(void* dest, const void* src, size_t n);
 
+//
+//	generic runtime-parametrized area downscale, 32bpp (ARGB8888) only.
+//	dw/dh (destination width/height) are runtime arguments -- one kernel
+//	covers any downscale ratio. v1 is nearest-neighbor sampling, not a
+//	true area-weighted box filter.
+//
+//	downscale_area_n32 silently falls back to downscale_area_c32 (~20x
+//	slower) when src/dst/sp/dp aren't 4-byte aligned or dw exceeds
+//	DOWNSCALE_AREA_MAX_DW.
+//
+#define DOWNSCALE_AREA_MAX_DW 1024
+void downscale_area_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp, uint32_t dw, uint32_t dh);
+void downscale_area_c32(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp, uint32_t dw, uint32_t dh);
+
 //	C scalers
 void scale1x1_c16(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
 void scale1x1_c32(void* __restrict src, void* __restrict dst, uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp);
