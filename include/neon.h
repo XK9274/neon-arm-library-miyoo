@@ -48,6 +48,22 @@ void scale4x4_n32(void* __restrict src, void* __restrict dst, uint32_t sw, uint3
 void* neon_memcpy(void* dest, const void* src, size_t n);
 
 //
+//	solid-color alpha blend fill, 32bpp (ARGB8888) only. SDL_BLENDMODE_BLEND
+//	"over" compositing: dstRGB = srcRGB*srcA + dstRGB*(1-srcA),
+//	dstA = srcA + dstA*(1-srcA), each term rounded via (x+127)/255.
+//	args/	dst   :	dst offset		address of top left corner
+//		color :	blend color		packed 32bpp ARGB8888 pixel
+//		w     :	width			pixels
+//		h     :	height			pixels
+//		dp    :	dst pitch (stride)	bytes	if 0, (w * 4) is used
+//
+//	blend_solid_n32 falls back to blend_solid_c32 when dst or dp aren't
+//	4-byte aligned.
+//
+void blend_solid_n32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t h, uint32_t dp);
+void blend_solid_c32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t h, uint32_t dp);
+
+//
 //	generic runtime-parametrized area downscale, 32bpp (ARGB8888) only.
 //	dw/dh (destination width/height) are runtime arguments -- one kernel
 //	covers any downscale ratio. v1 is nearest-neighbor sampling, not a
