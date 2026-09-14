@@ -2,7 +2,7 @@
 #include "neon.h"
 
 //
-//	generic runtime-parametrized area downscale for 32bpp (ARGB8888)
+//	generic runtime-parametrized area resize for 32bpp (ARGB8888)
 //	args/	src :	src offset		address of top left corner
 //		dst :	dst offset		address of top left corner
 //		sw  :	src width		pixels
@@ -14,7 +14,8 @@
 //
 //	v1: nearest-neighbor sampling, not a true area-weighted box filter.
 //	dw/dh are runtime arguments rather than baked into the function name,
-//	so one kernel covers any downscale ratio.
+//	so one kernel covers any resize ratio, up or down -- sx = x*sw/dw and
+//	sy = y*sh/dh don't assume either direction.
 //
 //	Each source index is computed directly from x/y (sx = x*sw/dw).
 //
@@ -89,4 +90,16 @@ void downscale_area_n32(void* __restrict src, void* __restrict dst,
 			*(uint32_t*)(drow + x*4) = *(const uint32_t*)(srow + xoff[x]);
 		}
 	}
+}
+
+void upscale_area_c32(void* __restrict src, void* __restrict dst,
+                       uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp,
+                       uint32_t dw, uint32_t dh) {
+	downscale_area_c32(src, dst, sw, sh, sp, dp, dw, dh);
+}
+
+void upscale_area_n32(void* __restrict src, void* __restrict dst,
+                       uint32_t sw, uint32_t sh, uint32_t sp, uint32_t dp,
+                       uint32_t dw, uint32_t dh) {
+	downscale_area_n32(src, dst, sw, sh, sp, dp, dw, dh);
 }
