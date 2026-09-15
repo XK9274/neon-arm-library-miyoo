@@ -64,6 +64,22 @@ void blend_solid_n32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t 
 void blend_solid_c32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t h, uint32_t dp);
 
 //
+//	solid-color additive fill, 32bpp (ARGB8888) only. SDL_BLENDMODE_ADD
+//	compositing: dstRGB = clamp(srcRGB*srcA + dstRGB, 0, 255), dstA
+//	unchanged, each src term rounded via (x+127)/255.
+//	args/	dst   :	dst offset		address of top left corner
+//		color :	add color		packed 32bpp ARGB8888 pixel
+//		w     :	width			pixels
+//		h     :	height			pixels
+//		dp    :	dst pitch (stride)	bytes	if 0, (w * 4) is used
+//
+//	add_solid_n32 falls back to add_solid_c32 when dst or dp aren't
+//	4-byte aligned.
+//
+void add_solid_n32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t h, uint32_t dp);
+void add_solid_c32(void* __restrict dst, uint32_t color, uint32_t w, uint32_t h, uint32_t dp);
+
+//
 //	generic runtime-parametrized area resize, 32bpp (ARGB8888) only.
 //	dw/dh (destination width/height) are runtime arguments -- one kernel
 //	covers any resize ratio, direction-agnostic (sx = x*sw/dw, sy = y*sh/dh
